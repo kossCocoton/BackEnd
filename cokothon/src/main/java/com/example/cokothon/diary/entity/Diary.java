@@ -25,7 +25,7 @@ public class Diary extends BaseTimeEntity {
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
+    @Column
     private int stress;
 
     @Column(nullable = false)
