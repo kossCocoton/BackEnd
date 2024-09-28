@@ -60,27 +60,22 @@ public class MemberController {
     public ResponseEntity<?> loginMember(
             HttpServletRequest request, @RequestBody MemberLoginDto memberLoginDto
             ) {
-        // 1. 사용자 조회
-        Optional<Member> optionalMember = memberRepository.findByUsername(memberLoginDto.getUsername());
+        // 로그인 처리
+        if (memberService.loginMember(memberLoginDto)) {
+            // 세션에 로그인 정보 저장
+            HttpSession session = request.getSession(true);
+            session.setAttribute("logined", memberLoginDto.getUsername());
 
-        // 2. 사용자 존재 여부 확인
-        if (!optionalMember.isPresent()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+            return ResponseEntity.ok("Login successful");
         }
 
-        Member member = optionalMember.get();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+    }
 
-//        // 3. 비밀번호 일치 여부 확인
-//        if (!passwordEncoder.matches(memberLoginDto.getPassword(), member.getPassword())) {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
-//        }
-
-        // 4. 세션에 사용자 정보 저장
-        HttpSession session = request.getSession(true);  // 새로운 세션 생성 또는 기존 세션 사용
-        session.setAttribute("logined", member);  // 세션에 로그인된 사용자 저장
-
-        // 5. 로그인 성공 응답
-        return ResponseEntity.status(HttpStatus.OK).body("Login successful");
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpSession session) {
+        session.removeAttribute("logined");
+        return ResponseEntity.status(HttpStatus.OK).body("Logout Successful");
     }
 
 }
