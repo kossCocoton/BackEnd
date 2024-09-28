@@ -10,4 +10,5 @@ import lombok.*;
 public class StressDto {
     private Long memberId;
     private Integer stress;
+    private String date;
 }
