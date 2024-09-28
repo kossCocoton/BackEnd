@@ -26,6 +26,7 @@ public class StressServiceImpl implements StressService{
             Stress stress = Stress.builder()
                     .stress(stressDto.getStress())
                     .member(member1).build();
+            stressRepository.save(stress);
             return stress;
         }
         return null;

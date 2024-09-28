@@ -1,2 +1,10 @@
-package com.example.cokothon.emotion.service;public class EmotionService {
+package com.example.cokothon.emotion.service;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class EmotionService {
+
 }

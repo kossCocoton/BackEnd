@@ -10,6 +10,8 @@ import com.example.cokothon.member.entity.Gender;
 import com.example.cokothon.member.entity.Job;
 import com.example.cokothon.member.entity.Member;
 import com.example.cokothon.member.repository.MemberRepository;
+import com.example.cokothon.stress.dto.StressDto;
+import com.example.cokothon.stress.service.StressService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/diary")
 public class DiaryController {
     private final DiaryService diaryService;
+
+    private final StressService stressService;
     private final MemberRepository memberRepository;
 
 
@@ -35,8 +39,20 @@ public class DiaryController {
 
     @PostMapping("/stress/{diary_id}")
     public ResponseEntity<Void> updateDiary(@PathVariable("diary_id") Long diaryId,
-                                                          @RequestBody DiaryUpdateRequest updateRequest) {
+                                                          @RequestBody DiaryUpdateRequest updateRequest, HttpSession session) {
+        Member member = (Member) session.getAttribute("logined");
+        if (member == null) {
+            throw new IllegalArgumentException("로그인 된 회원 정보가 없습니다.");
+        }
+
+        StressDto stressDto = StressDto.builder()
+                                        .memberId(member.getMember_id())
+                                        .stress(updateRequest.stress())
+                                        .build();
+
         diaryService.updateDiary(diaryId, updateRequest);
+        stressService.createStress(stressDto);
+
         return ResponseEntity.noContent().build(); // 성공 시 204 No Content 반환
     }
 
