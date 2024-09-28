@@ -9,6 +9,7 @@ import com.example.cokothon.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,7 +18,10 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
 
-    public Long saveArticle(CreateArticle createArticle) {
+    public Long saveArticle(CreateArticle createArticle, Member member) {
+
+
+
         CategoryList categoryList =
                 new CategoryList(createArticle.getCategory());
 
@@ -27,9 +31,10 @@ public class ArticleService {
                 .categoryList(categoryList)
                 .build();
 
-        article.changeCategoryList(categoryList);
         //멤버 정보 받아서 연관관계 저장
-        article.changeMember(new Member());
+
+        article.changeCategoryList(categoryList);
+        article.changeMember(member);
         categoryList.changeArticle(article);
 
         return articleRepository.save(article).getId();

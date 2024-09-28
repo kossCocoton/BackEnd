@@ -13,6 +13,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatterBuilder;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -50,6 +51,9 @@ public class Article extends BaseTimeEntity {
 
     public void changeMember(Member member) {
         this.member = member;
+        if (member.getArticles() == null){
+            member.setArticles(new ArrayList<Article>());
+        }
         member.getArticles().add(this);
     }
 }
