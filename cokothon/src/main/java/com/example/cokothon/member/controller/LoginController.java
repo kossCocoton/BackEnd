@@ -67,6 +67,9 @@ public class LoginController {
             Member member = memberService.findByUserName(memberLoginDto.getUsername());
             session.setAttribute("logined", member);
 
+            Member memberInSession = (Member) session.getAttribute("logined");
+            System.out.println("회원 ID: " + memberInSession.getUsername());
+
             return ResponseEntity.ok("Login successful");
         }
 
