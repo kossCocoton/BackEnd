@@ -2,14 +2,16 @@ package com.example.cokothon.member.entity;
 
 import com.example.cokothon.article.entity.Article;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Member {
     @Id
     @Column(nullable = false)
