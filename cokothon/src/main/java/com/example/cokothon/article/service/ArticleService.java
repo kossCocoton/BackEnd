@@ -52,6 +52,10 @@ public class ArticleService {
         return articleRepository.findAll();
     }
 
+    public List<Article> getAllCategory(){
+        return articleRepository.findAllCategories();
+    }
+
     public GetMyArticle getMyArticle(Long member_id) {
         Optional<Article> article =  articleRepository.findById(member_id);
 

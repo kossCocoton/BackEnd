@@ -2,6 +2,7 @@ package com.example.cokothon.categoryList.Entity;
 
 
 import com.example.cokothon.article.entity.Article;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,9 @@ public class CategoryList {
     @Enumerated(EnumType.STRING)
     private CategoryEnum category;
 
-    @OneToOne(mappedBy = "categoryList")
+
+    @OneToOne(mappedBy = "categoryList", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Article article;
 
     public CategoryList(CategoryEnum category) {

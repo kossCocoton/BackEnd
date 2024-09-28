@@ -55,7 +55,7 @@ public class ArticleController {
             return ResponseEntity.badRequest().body("로그인 하세요");
         }
 
-        List<Article> articles = articleService.getAllArticles();
+        List<Article> articles = articleService.getAllCategory();
 
         //dto 변환
         List <GetAllArticles> getAllArticles = articles.stream()
@@ -63,7 +63,11 @@ public class ArticleController {
                         .id(a.getId())
                         .title(a.getTitle())
                         .content(a.getContent())
-                        .categoryList(a.getCategoryList())
+                        .category(a.getCategoryList().getCategory())
+                        .age(a.getMember().getAge())
+                        .gender(a.getMember().getGender())
+                        .job(a.getMember().getJob())
+                        .date(a.getCreatedAt())
                         .build()).toList();
 
         return ResponseEntity.ok().body(getAllArticles);

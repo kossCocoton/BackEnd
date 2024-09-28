@@ -25,4 +25,9 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Modifying
     @Query("DELETE FROM Article a WHERE a.member.member_id = :member_id AND a.id = :article_id ")
     public void deleteArticle(@Param("member_id") Long member_id,@Param("article_id") Long article_id);
+
+    @Query("select a from Article a join fetch a.categoryList")
+    public List<Article> findAllCategories();
+
+
 }
