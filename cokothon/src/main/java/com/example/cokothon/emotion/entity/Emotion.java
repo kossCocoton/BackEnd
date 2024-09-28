@@ -18,12 +18,16 @@ public class Emotion {
     @Column(nullable = false)
     private String emoji;
 
-    @Column(nullable = false)
     private int stress;
 
     @Builder
     public Emotion (String emoji, int stress){
         this.emoji = emoji;
         this.stress = stress;
+    }
+
+    @Builder
+    public Emotion (String emoji){
+        this.emoji = emoji;
     }
 }
