@@ -8,6 +8,7 @@ import lombok.*;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Setter
 public class Diary extends BaseTimeEntity {
 
     @Id @Column(name = "diary_id")
