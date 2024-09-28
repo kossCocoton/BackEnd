@@ -5,6 +5,7 @@ import com.example.cokothon.categoryList.Entity.CategoryList;
 import com.example.cokothon.comments.domain.Comments;
 import com.example.cokothon.common.BaseTimeEntity;
 import com.example.cokothon.member.entity.Member;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import lombok.Builder;
@@ -29,6 +30,7 @@ public class Article extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
+    @JsonIgnore
     private Member member;
 
     @OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -48,6 +50,7 @@ public class Article extends BaseTimeEntity {
     public Article(String title, String content, CategoryList categoryList) {
         this.title = title;
         this.content = content;
+        this.categoryList = categoryList;
     }
 
     public void changeCategoryList(CategoryList categoryList) {

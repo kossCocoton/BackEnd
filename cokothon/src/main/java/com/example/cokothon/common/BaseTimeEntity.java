@@ -21,12 +21,11 @@ public abstract class BaseTimeEntity {
     @LastModifiedDate
     private String updatedAt;
 
+
     @PrePersist
     public void onPrePersist() {
-        this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        this.updatedAt = this.createdAt;
+        this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
     }
-
     @PreUpdate
     public void onPreUpdate() {
         this.updatedAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
