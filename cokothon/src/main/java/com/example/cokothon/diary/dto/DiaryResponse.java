@@ -18,7 +18,7 @@ public record DiaryResponse(
                 diary.getEmoji(),
                 diary.getStress(),
                 diary.getContent(),
-                diary.getDate()
+                diary.getCreatedAt()
         );
     }
 }

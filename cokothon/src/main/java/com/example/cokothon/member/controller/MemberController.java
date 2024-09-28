@@ -40,7 +40,7 @@ public class MemberController {
 
         List<DiaryResponse> diaryDtoList = diaryList.stream()
                 .map(diary -> new DiaryResponse(diary.getId(), diary.getTitle(), diary.getEmoji(),
-                        diary.getStress(), diary.getContent(), diary.getDate()))
+                        diary.getStress(), diary.getContent(), diary.getCreatedAt()))
                 .collect(Collectors.toList());
 
         List<StressDto> stressDtoList = stressList.stream()

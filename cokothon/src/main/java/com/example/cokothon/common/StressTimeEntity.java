@@ -21,6 +21,6 @@ public class StressTimeEntity {
 
     @PrePersist
     public void onPrePersist() {
-        this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
     }
 }
