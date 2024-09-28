@@ -3,6 +3,8 @@ package com.example.cokothon.article.repository;
 
 import com.example.cokothon.article.entity.Article;
 import com.example.cokothon.categoryList.Entity.CategoryEnum;
+import com.example.cokothon.member.entity.Gender;
+import com.example.cokothon.member.entity.Job;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,7 +15,10 @@ import java.util.List;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-    @Query("select a from Article a join fetch a.categoryList c where c.category = :categoryEnum")
-    public List<Article> findJobFitter(@Param("category") CategoryEnum categoryEnum);
+    @Query("select a from Article a join fetch a.categoryList c join fetch a.member m" +
+            " where c.category = :category or m.gender = :gender or m.job = :job")
+    public List<Article> findSituationFitter(@Param("category") CategoryEnum categoryEnum,
+                                             @Param("gender")Gender gender,
+                                             @Param("job") Job job);
 
 }

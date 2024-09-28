@@ -87,15 +87,18 @@ public class ArticleController {
     public ResponseEntity<Object> getArticle(HttpSession session,
                                              @RequestParam(name = "job") Job job,
                                              @RequestParam(name = "gender") Gender gender,
-                                             @RequestParam(name = "situation")CategoryEnum category,
-                                             @RequestParam(name = "stress") Stress stress) {
+                                             @RequestParam(name = "situation")CategoryEnum category) {
+        /*
         Member memberInSession = (Member) session.getAttribute("logined");
         if (memberInSession == null) {
             return ResponseEntity.badRequest().body("로그인 하세요");
         }
+        */
+
+
 
         return ResponseEntity.ok().body(
-                articleService.fitterArticle(job, gender, category, stress));
+                articleService.fitterArticle(job, gender, category));
 
 
     }

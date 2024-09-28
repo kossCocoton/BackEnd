@@ -67,10 +67,13 @@ public class ArticleService {
     }
 
     public List<FitterArticle> fitterArticle(Job job, Gender gender,
-                                       CategoryEnum category,
-                                       Stress stress){
+                                       CategoryEnum category){
 
-        List<Article> articles = articleRepository.findJobFitter(category);
+        List<Article> articles = articleRepository.
+                findSituationFitter(category,gender,job);
+
+
+
 
         List<FitterArticle> fitterArticles = articles.stream()
                 .map(article -> FitterArticle.builder()
