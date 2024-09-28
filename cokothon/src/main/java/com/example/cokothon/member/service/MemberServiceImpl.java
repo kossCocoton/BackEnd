@@ -1,6 +1,7 @@
 package com.example.cokothon.member.service;
 
 import com.example.cokothon.member.dto.MemberDto;
+import com.example.cokothon.member.dto.MemberLoginDto;
 import com.example.cokothon.member.entity.Member;
 import com.example.cokothon.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private MemberRepository memberRepository;
-    //private final PasswordEncoder passwordEncoder;
     @Override
     public Member createMember(MemberDto memberDto) {
         // Username 중복 확인
@@ -42,11 +42,20 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Member findByUserName(String userName) throws Exception {
-        Optional<Member> existingMemberByUsername = memberRepository.findByUsername(userName);
-        if (existingMemberByUsername.isPresent()) {
-            return existingMemberByUsername.get();
+    // 로그인 시 비밀번호 일치 여부 확인
+    public boolean loginMember(MemberLoginDto memberLoginDto) {
+        Optional<Member> optionalMember = memberRepository.findByUsername(memberLoginDto.getUsername());
+
+        if (optionalMember.isPresent()) {
+            Member member = optionalMember.get();
+            // 입력된 비밀번호와 DB에 저장된 비밀번호의 일치 여부 확인
+            if (member.getPassword().equals(memberLoginDto.getPassword())) {
+                // 비밀번호가 일치하면 로그인 성공
+                return true;
+            }
         }
-        throw new Exception();
+        // 로그인 실패
+        return false;
     }
+
 }
