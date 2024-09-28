@@ -43,6 +43,7 @@ public class Article extends BaseTimeEntity {
     public Article(String title, String content, CategoryList categoryList) {
         this.title = title;
         this.content = content;
+        this.categoryList = categoryList;
     }
 
     public void changeCategoryList(CategoryList categoryList) {

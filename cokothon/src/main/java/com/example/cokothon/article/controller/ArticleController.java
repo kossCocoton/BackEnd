@@ -60,8 +60,10 @@ public class ArticleController {
         //dto 변환
         List <GetAllArticles> getAllArticles = articles.stream()
                 .map(a -> GetAllArticles.builder()
+                        .id(a.getId())
                         .title(a.getTitle())
                         .content(a.getContent())
+                        .categoryList(a.getCategoryList())
                         .build()).toList();
 
         return ResponseEntity.ok().body(getAllArticles);
