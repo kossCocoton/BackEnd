@@ -44,7 +44,8 @@ public class MemberController {
                 .collect(Collectors.toList());
 
         List<StressDto> stressDtoList = stressList.stream()
-                .map(stress -> new StressDto(stress.getMember().getMember_id(), stress.getStress()))
+                .map(stress -> new StressDto(stress.getMember().getMember_id(), stress.getStress(),
+                        stress.getCreatedAt()))
                 .collect(Collectors.toList());
 
         ProfileDto profileDto = ProfileDto.builder()

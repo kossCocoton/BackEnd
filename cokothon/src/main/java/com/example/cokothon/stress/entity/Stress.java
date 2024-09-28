@@ -2,6 +2,7 @@ package com.example.cokothon.stress.entity;
 
 
 import com.example.cokothon.common.BaseTimeEntity;
+import com.example.cokothon.common.StressTimeEntity;
 import com.example.cokothon.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +13,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Stress extends BaseTimeEntity {
+public class Stress extends StressTimeEntity {
     @Id
     @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
