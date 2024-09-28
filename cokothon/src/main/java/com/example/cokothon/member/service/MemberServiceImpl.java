@@ -4,7 +4,7 @@ import com.example.cokothon.member.dto.MemberDto;
 import com.example.cokothon.member.entity.Member;
 import com.example.cokothon.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,7 +14,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private MemberRepository memberRepository;
+
     //private final PasswordEncoder passwordEncoder;
+
     @Override
     public Member createMember(MemberDto memberDto) {
         // Username 중복 확인

@@ -7,7 +7,8 @@ public record DiaryRequest(
         String title,
         String emoji,
         String content,
-        int stress
+        int stress,
+        String date
 ) {
     public Diary toEntity(Member member) {
         return new Diary(
@@ -15,6 +16,7 @@ public record DiaryRequest(
                 emoji,
                 content,
                 stress,
+                date,
                 member
         );
     }

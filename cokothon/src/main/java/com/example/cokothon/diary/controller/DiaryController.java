@@ -34,20 +34,6 @@ public class DiaryController {
         return diaryService.createDiary(diaryRequestDto, member);
     }
 
-/*
-    @PostMapping
-    public DiaryResponse createDiary(@RequestBody DiaryRequest diaryRequestDto) {
-        Member member = new Member();
-        member.setMember_id(1L); // 테스트용 ID 설정
-        member.setUsername("testuser");
-        member.setPassword("testpassword");
-        member.setNickname("testnickname");
-        member.setAge(Age.TWENTY); // 가정한 Age 값 (ENUM 값 중 하나)
-        member.setJob(Job.무직); // 가정한 Job 값 (ENUM 값 중 하나)
-        member.setGender(Gender.여성); // 가정한 Gender 값 (ENUM 값 중 하나)
-        Member savedMember = memberRepository.save(member);
-        return diaryService.createDiary(diaryRequestDto, savedMember);
-    }
- */
+
 }
 

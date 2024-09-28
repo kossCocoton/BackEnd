@@ -8,7 +8,8 @@ public record DiaryResponse(
         String title,
         String emoji,
         String content,
-        int stress
+        int stress,
+        String date
 ) {
     public static DiaryResponse fromEntity(Diary diary) {
         return new DiaryResponse(
@@ -16,7 +17,8 @@ public record DiaryResponse(
                 diary.getTitle(),
                 diary.getEmoji(),
                 diary.getContent(),
-                diary.getStress()
+                diary.getStress(),
+                diary.getDate()
         );
     }
 }

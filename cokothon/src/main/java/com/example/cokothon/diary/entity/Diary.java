@@ -16,28 +16,32 @@ public class Diary extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String title;
 
-    @Column
+    @Column(nullable = false)
     private String emoji;
 
-    @Column
+    @Column(nullable = false)
     private String content;
 
-    @Column
+    @Column(nullable = false)
     private int stress;
+
+    @Column(nullable = false)
+    private String date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
     @Builder
-    public Diary(String title, String emoji, String content, int stress, Member member){
+    public Diary(String title, String emoji, String content, int stress, String date, Member member){
         this.title = title;
         this.emoji = emoji;
         this.content = content;
         this.stress = stress;
+        this.date = date;
         this.member = member;
     }
 }
