@@ -35,7 +35,7 @@ public class Article extends BaseTimeEntity {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "catlist_id")
     private CategoryList categoryList;
 

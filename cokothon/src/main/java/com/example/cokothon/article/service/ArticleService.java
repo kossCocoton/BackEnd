@@ -14,6 +14,7 @@ import com.example.cokothon.member.entity.Member;
 import com.example.cokothon.stress.entity.Stress;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class ArticleService {
 
         article.changeCategoryList(categoryList);
         article.changeMember(member);
-        categoryList.changeArticle(article);
+
 
         return articleRepository.save(article).getId();
     }
@@ -84,6 +85,12 @@ public class ArticleService {
                 .toList();
 
         return fitterArticles;
+
+    }
+
+    @Transactional
+    public void deleteArticle(Long member_id, Long article_id) {
+        articleRepository.deleteArticle(member_id, article_id);
 
     }
 

@@ -15,7 +15,7 @@ import java.util.List;
 public class Member {
     @Id
     @Column(nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue()
     private Long member_id;
 
     @OneToMany(mappedBy = "member")

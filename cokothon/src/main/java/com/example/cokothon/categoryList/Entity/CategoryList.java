@@ -17,16 +17,12 @@ public class CategoryList {
     @Enumerated(EnumType.STRING)
     private CategoryEnum category;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "article_id")
-    private Article article;
+
 
     public CategoryList(CategoryEnum category) {
         this.category = category;
     }
 
-    public void changeArticle(Article article){
-        this.article = article;
-    }
+
 
 }

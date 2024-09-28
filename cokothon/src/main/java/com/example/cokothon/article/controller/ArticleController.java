@@ -14,6 +14,7 @@ import com.example.cokothon.stress.entity.Stress;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -100,6 +101,22 @@ public class ArticleController {
         return ResponseEntity.ok().body(
                 articleService.fitterArticle(job, gender, category));
 
+
+    }
+
+    @DeleteMapping("/api/myarticle")
+    public ResponseEntity<Object> deleteMyArticle(
+            HttpSession session,
+            @Param("article_id") Long article_id){
+
+        Member memberInSession = (Member) session.getAttribute("logined");
+        if (memberInSession == null) {
+            return ResponseEntity.badRequest().body("로그인 하세요");
+        }
+
+        articleService.deleteArticle(memberInSession.getMember_id(), article_id);
+
+        return ResponseEntity.ok().build();
 
     }
 
