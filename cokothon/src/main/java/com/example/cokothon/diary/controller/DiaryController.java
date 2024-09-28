@@ -34,12 +34,16 @@ public class DiaryController {
     }
 
     @PostMapping("/stress/{diary_id}")
-    public ResponseEntity<Void> updateDiaryStressAndEmoji(@PathVariable("diary_id") Long diaryId,
+    public ResponseEntity<Void> updateDiary(@PathVariable("diary_id") Long diaryId,
                                                           @RequestBody DiaryUpdateRequest updateRequest) {
-        diaryService.updateDiaryStressAndEmoji(diaryId, updateRequest);
+        diaryService.updateDiary(diaryId, updateRequest);
         return ResponseEntity.noContent().build(); // 성공 시 204 No Content 반환
     }
 
+    @PostMapping("/{diary_id}")
+    public void deleteDiary(@PathVariable("diary_id") Long diaryId) {
+        diaryService.deleteDiary(diaryId);
+    }
 
 }
 
