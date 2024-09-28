@@ -25,6 +25,7 @@ public class CategoryList {
 
     @OneToOne(mappedBy = "categoryList", fetch = FetchType.LAZY)
     @JsonIgnore
+
     private Article article;
 
     public CategoryList(CategoryEnum category) {

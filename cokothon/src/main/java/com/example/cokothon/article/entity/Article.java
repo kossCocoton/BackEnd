@@ -65,4 +65,9 @@ public class Article extends BaseTimeEntity {
         }
         member.getArticles().add(this);
     }
+
+    public void changeComments(Comments comments){
+        this.comments.add(comments);
+        comments.setArticle(this);
+    }
 }
