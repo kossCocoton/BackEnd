@@ -4,7 +4,6 @@ import com.example.cokothon.member.dto.MemberDto;
 import com.example.cokothon.member.entity.Member;
 import com.example.cokothon.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
