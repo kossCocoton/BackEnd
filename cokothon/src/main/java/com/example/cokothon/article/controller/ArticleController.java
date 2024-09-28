@@ -88,12 +88,12 @@ public class ArticleController {
                                              @RequestParam(name = "job") Job job,
                                              @RequestParam(name = "gender") Gender gender,
                                              @RequestParam(name = "situation")CategoryEnum category) {
-        /*
+
         Member memberInSession = (Member) session.getAttribute("logined");
         if (memberInSession == null) {
             return ResponseEntity.badRequest().body("로그인 하세요");
         }
-        */
+
 
 
 
