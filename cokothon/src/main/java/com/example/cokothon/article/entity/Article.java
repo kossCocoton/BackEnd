@@ -3,6 +3,7 @@ package com.example.cokothon.article.entity;
 import com.example.cokothon.categoryList.Entity.CategoryEnum;
 import com.example.cokothon.categoryList.Entity.CategoryList;
 import com.example.cokothon.common.BaseTimeEntity;
+import com.example.cokothon.member.entity.Member;
 import jakarta.persistence.*;
 
 import lombok.Builder;
@@ -12,6 +13,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatterBuilder;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -22,6 +24,10 @@ public class Article extends BaseTimeEntity {
     @Id @GeneratedValue
     @Column(name = "article_id",nullable = false)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -41,5 +47,13 @@ public class Article extends BaseTimeEntity {
 
     public void changeCategoryList(CategoryList categoryList) {
         this.categoryList = categoryList;
+    }
+
+    public void changeMember(Member member) {
+        this.member = member;
+        if (member.getArticles() == null){
+            member.setArticles(new ArrayList<Article>());
+        }
+        member.getArticles().add(this);
     }
 }
