@@ -2,6 +2,7 @@ package com.example.cokothon.article.service;
 
 
 import com.example.cokothon.article.dto.CreateArticle;
+import com.example.cokothon.article.dto.GetMyArticle;
 import com.example.cokothon.article.entity.Article;
 import com.example.cokothon.article.repository.ArticleRepository;
 import com.example.cokothon.categoryList.Entity.CategoryList;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +44,21 @@ public class ArticleService {
 
     public List<Article> getAllArticles() {
         return articleRepository.findAll();
+    }
+
+    public GetMyArticle getMyArticle(Long member_id) {
+        Optional<Article> article =  articleRepository.findById(member_id);
+
+        if (article.isPresent()) {
+            Article tempArticle = article.get();
+            return GetMyArticle.builder()
+                    .title(tempArticle.getTitle())
+                    .content(tempArticle.getContent())
+                    .build();
+        }else{
+            return null;
+        }
+
     }
 
 }
