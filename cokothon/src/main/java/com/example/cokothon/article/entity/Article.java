@@ -2,6 +2,7 @@ package com.example.cokothon.article.entity;
 
 import com.example.cokothon.categoryList.Entity.CategoryEnum;
 import com.example.cokothon.categoryList.Entity.CategoryList;
+import com.example.cokothon.comments.domain.Comments;
 import com.example.cokothon.common.BaseTimeEntity;
 import com.example.cokothon.member.entity.Member;
 import jakarta.persistence.*;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -28,6 +30,9 @@ public class Article extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<Comments> comments = new ArrayList<>();
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -47,6 +52,7 @@ public class Article extends BaseTimeEntity {
 
     public void changeCategoryList(CategoryList categoryList) {
         this.categoryList = categoryList;
+        categoryList.setArticle(this);
     }
 
     public void changeMember(Member member) {
