@@ -6,17 +6,18 @@ import com.example.cokothon.article.dto.GetMyArticle;
 import com.example.cokothon.article.entity.Article;
 import com.example.cokothon.article.repository.ArticleRepository;
 import com.example.cokothon.article.service.ArticleService;
+import com.example.cokothon.categoryList.Entity.CategoryEnum;
+import com.example.cokothon.member.entity.Gender;
+import com.example.cokothon.member.entity.Job;
 import com.example.cokothon.member.entity.Member;
+import com.example.cokothon.stress.entity.Stress;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -79,6 +80,23 @@ public class ArticleController {
         }else{
             return ResponseEntity.ok().body(getMyArticle);
         }
+
+    }
+
+    @GetMapping("/api/article")
+    public ResponseEntity<Object> getArticle(HttpSession session,
+                                             @RequestParam(name = "job") Job job,
+                                             @RequestParam(name = "gender") Gender gender,
+                                             @RequestParam(name = "situation")CategoryEnum category,
+                                             @RequestParam(name = "stress") Stress stress) {
+        Member memberInSession = (Member) session.getAttribute("logined");
+        if (memberInSession == null) {
+            return ResponseEntity.badRequest().body("로그인 하세요");
+        }
+
+        return ResponseEntity.ok().body(
+                articleService.fitterArticle(job, gender, category, stress));
+
 
     }
 

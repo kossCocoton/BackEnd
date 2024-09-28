@@ -2,11 +2,16 @@ package com.example.cokothon.article.service;
 
 
 import com.example.cokothon.article.dto.CreateArticle;
+import com.example.cokothon.article.dto.FitterArticle;
 import com.example.cokothon.article.dto.GetMyArticle;
 import com.example.cokothon.article.entity.Article;
 import com.example.cokothon.article.repository.ArticleRepository;
+import com.example.cokothon.categoryList.Entity.CategoryEnum;
 import com.example.cokothon.categoryList.Entity.CategoryList;
+import com.example.cokothon.member.entity.Gender;
+import com.example.cokothon.member.entity.Job;
 import com.example.cokothon.member.entity.Member;
+import com.example.cokothon.stress.entity.Stress;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +63,24 @@ public class ArticleService {
         }else{
             return null;
         }
+
+    }
+
+    public List<FitterArticle> fitterArticle(Job job, Gender gender,
+                                       CategoryEnum category,
+                                       Stress stress){
+
+        List<Article> articles = articleRepository.findJobFitter(category);
+
+        List<FitterArticle> fitterArticles = articles.stream()
+                .map(article -> FitterArticle.builder()
+                        .title(article.getTitle())
+                        .content(article.getContent())
+                        .build()
+                )
+                .toList();
+
+        return fitterArticles;
 
     }
 
