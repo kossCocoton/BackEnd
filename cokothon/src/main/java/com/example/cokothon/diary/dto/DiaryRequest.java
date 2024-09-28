@@ -5,17 +5,17 @@ import com.example.cokothon.member.entity.Member;
 
 public record DiaryRequest(
         String title,
-        String emoji,
         String content,
-        int stress,
-        String date
+        String date,
+        String emoji,
+        int stress
 ) {
     public Diary toEntity(Member member) {
         return new Diary(
                 title,
                 emoji,
-                content,
                 stress,
+                content,
                 date,
                 member
         );

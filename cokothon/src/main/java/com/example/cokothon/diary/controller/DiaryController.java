@@ -3,6 +3,7 @@ package com.example.cokothon.diary.controller;
 
 import com.example.cokothon.diary.dto.DiaryRequest;
 import com.example.cokothon.diary.dto.DiaryResponse;
+import com.example.cokothon.diary.dto.DiaryUpdateRequest;
 import com.example.cokothon.diary.service.DiaryService;
 import com.example.cokothon.member.entity.Age;
 import com.example.cokothon.member.entity.Gender;
@@ -11,10 +12,8 @@ import com.example.cokothon.member.entity.Member;
 import com.example.cokothon.member.repository.MemberRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,6 +33,17 @@ public class DiaryController {
         return diaryService.createDiary(diaryRequestDto, member);
     }
 
+    @PostMapping("/stress/{diary_id}")
+    public ResponseEntity<Void> updateDiary(@PathVariable("diary_id") Long diaryId,
+                                                          @RequestBody DiaryUpdateRequest updateRequest) {
+        diaryService.updateDiary(diaryId, updateRequest);
+        return ResponseEntity.noContent().build(); // 성공 시 204 No Content 반환
+    }
+
+    @PostMapping("/{diary_id}")
+    public void deleteDiary(@PathVariable("diary_id") Long diaryId) {
+        diaryService.deleteDiary(diaryId);
+    }
 
 }
 
