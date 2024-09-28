@@ -20,13 +20,7 @@ public class Diary extends BaseTimeEntity {
     private String title;
 
     @Column(nullable = false)
-    private String emoji;
-
-    @Column(nullable = false)
     private String content;
-
-    @Column
-    private int stress;
 
     @Column(nullable = false)
     private String date;
@@ -36,11 +30,9 @@ public class Diary extends BaseTimeEntity {
     private Member member;
 
     @Builder
-    public Diary(String title, String emoji, String content, int stress, String date, Member member){
+    public Diary(String title, String content, String date, Member member){
         this.title = title;
-        this.emoji = emoji;
         this.content = content;
-        this.stress = stress;
         this.date = date;
         this.member = member;
     }
