@@ -1,2 +1,4 @@
-package com.example.cokothon.emotion.dto;public record EmotionRequest() {
+package com.example.cokothon.emotion.dto;
+
+public record EmotionRequest() {
 }

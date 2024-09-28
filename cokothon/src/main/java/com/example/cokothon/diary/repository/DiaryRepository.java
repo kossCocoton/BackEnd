@@ -14,5 +14,4 @@ public interface DiaryRepository extends JpaRepository<Diary, Long> {
     @Query("select d from Diary d where d.member = :member")
     List<Diary> findAllById(Member member);
 
-
 }

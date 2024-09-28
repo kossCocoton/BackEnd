@@ -8,8 +8,6 @@ import lombok.*;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Setter
-@Table(name = "confirm")
 public class Diary extends BaseTimeEntity {
 
     @Id @Column(name = "diary_id")
@@ -18,6 +16,10 @@ public class Diary extends BaseTimeEntity {
 
     @Column(nullable = false)
     private String title;
+
+    private String emoji;
+
+    private int stress;
 
     @Column(nullable = false)
     private String content;
@@ -30,10 +32,13 @@ public class Diary extends BaseTimeEntity {
     private Member member;
 
     @Builder
-    public Diary(String title, String content, String date, Member member){
+    public Diary(String title, String emoji, int stress, String content, String date, Member member){
         this.title = title;
+        this.emoji = emoji;
+        this.stress = stress;
         this.content = content;
         this.date = date;
         this.member = member;
     }
+
 }
