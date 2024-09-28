@@ -1,6 +1,9 @@
 package com.example.cokothon.member.dto;
 
+import com.example.cokothon.diary.dto.DiaryResponse;
 import com.example.cokothon.diary.entity.Diary;
+import com.example.cokothon.stress.dto.StressDto;
+import com.example.cokothon.stress.entity.Stress;
 import lombok.*;
 
 import java.util.List;
@@ -12,5 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 public class ProfileDto {
     String nickname;
-    List<Diary> diaryList;
+    List<DiaryResponse> diaryList;
+    List<StressDto> stressList;
 }

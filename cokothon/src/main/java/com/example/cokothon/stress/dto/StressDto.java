@@ -8,6 +8,6 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 public class StressDto {
-    private String memberId;
+    private Long memberId;
     private Integer stress;
 }

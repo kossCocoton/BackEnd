@@ -13,6 +13,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByNickname(String nickname);
 
     @Query("SELECT m FROM Member m where m.member_id = :memberId")
-    Optional<Member> findByMember_id(String memberId);
+    Optional<Member> findByMember_id(Long memberId);
 
 }

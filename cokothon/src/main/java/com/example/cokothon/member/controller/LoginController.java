@@ -59,12 +59,13 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> loginMember(
             HttpServletRequest request, @RequestBody MemberLoginDto memberLoginDto
-            ) {
+            ) throws Exception {
         // 로그인 처리
         if (memberService.loginMember(memberLoginDto)) {
             // 세션에 로그인 정보 저장
             HttpSession session = request.getSession(true);
-            session.setAttribute("logined", memberLoginDto.getUsername());
+            Member member = memberService.findByUserName(memberLoginDto.getUsername());
+            session.setAttribute("logined", member);
 
             return ResponseEntity.ok("Login successful");
         }
