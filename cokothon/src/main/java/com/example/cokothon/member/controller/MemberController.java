@@ -32,9 +32,9 @@ public class MemberController {
 
     @GetMapping()
     public ResponseEntity<?> getProfile(
-            HttpSession session
-    ) {
-        Member member = (Member) session.getAttribute("logined");
+    ) throws Exception {
+        //Member member = (Member) session.getAttribute("logined");
+        Member member = memberService.findByUserName("nykim1016");
         List<Diary> diaryList = diaryRepository.findAllById(member);
         List<Stress> stressList = stressService.getAllStress(member.getMember_id());
 

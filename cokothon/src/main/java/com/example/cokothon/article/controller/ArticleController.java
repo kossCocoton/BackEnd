@@ -10,6 +10,7 @@ import com.example.cokothon.categoryList.Entity.CategoryEnum;
 import com.example.cokothon.member.entity.Gender;
 import com.example.cokothon.member.entity.Job;
 import com.example.cokothon.member.entity.Member;
+import com.example.cokothon.member.service.MemberService;
 import com.example.cokothon.stress.entity.Stress;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -27,20 +28,22 @@ import java.util.List;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final MemberService memberService;
 
     //게시물 등록
     @PostMapping("/api/article")
     public ResponseEntity<String> createArticle(HttpSession session,
-                                              @RequestBody CreateArticle createArticle) {
+                                              @RequestBody CreateArticle createArticle) throws Exception {
 
 
-        Member memberInSession = (Member) session.getAttribute("logined");
+//        Member memberInSession = (Member) session.getAttribute("logined");
+//
+//        if (memberInSession == null) {
+//            return ResponseEntity.badRequest().body("로그인 하세요");
+//        }
+        Member member = memberService.findByUserName("nykim1016");
 
-        if (memberInSession == null) {
-            return ResponseEntity.badRequest().body("로그인 하세요");
-        }
-
-        articleService.saveArticle(createArticle, memberInSession);
+        articleService.saveArticle(createArticle, member);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("회원 저장 성공");
     }
