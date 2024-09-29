@@ -10,6 +10,7 @@ import com.example.cokothon.member.entity.Gender;
 import com.example.cokothon.member.entity.Job;
 import com.example.cokothon.member.entity.Member;
 import com.example.cokothon.member.repository.MemberRepository;
+import com.example.cokothon.member.service.MemberService;
 import com.example.cokothon.stress.dto.StressDto;
 import com.example.cokothon.stress.service.StressService;
 import jakarta.servlet.http.HttpSession;
@@ -25,15 +26,16 @@ public class DiaryController {
 
     private final StressService stressService;
     private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
 
     @PostMapping
-    public DiaryResponse createDiary(@RequestBody DiaryRequest diaryRequestDto, HttpSession session) {
-        Member member = (Member) session.getAttribute("logined");
-        if (member == null) {
-            throw new IllegalArgumentException("로그인된 회원 정보가 없습니다.");
-        }
-
+    public DiaryResponse createDiary(@RequestBody DiaryRequest diaryRequestDto, HttpSession session) throws Exception {
+//        Member member = (Member) session.getAttribute("logined");
+//        if (member == null) {
+//            throw new IllegalArgumentException("로그인된 회원 정보가 없습니다.");
+//        }
+        Member member = memberService.findByUserName("nykim1016");
         return diaryService.createDiary(diaryRequestDto, member);
     }
 
