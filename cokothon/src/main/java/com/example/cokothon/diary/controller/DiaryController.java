@@ -41,11 +41,17 @@ public class DiaryController {
 
     @PostMapping("/stress/{diary_id}")
     public ResponseEntity<Void> updateDiary(@PathVariable("diary_id") Long diaryId,
-                                                          @RequestBody DiaryUpdateRequest updateRequest, HttpSession session) {
-        Member member = (Member) session.getAttribute("logined");
-        if (member == null) {
-            throw new IllegalArgumentException("로그인 된 회원 정보가 없습니다.");
-        }
+                                                          @RequestBody DiaryUpdateRequest updateRequest, HttpSession session) throws Exception {
+
+
+
+
+        //        Member member = (Member) session.getAttribute("logined");
+//        if (member == null) {
+//            throw new IllegalArgumentException("로그인 된 회원 정보가 없습니다.");
+//        }
+
+        Member member =  memberService.findByUserName("nykim1016");
 
         StressDto stressDto = StressDto.builder()
                                         .memberId(member.getMember_id())
